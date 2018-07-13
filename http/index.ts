@@ -2,7 +2,7 @@
  * @Author: Mr.He 
  * @Date: 2018-03-22 16:20:52 
  * @Last Modified by: Mr.He
- * @Last Modified time: 2018-07-13 23:32:33
+ * @Last Modified time: 2018-07-13 23:54:24
  * @content what is the content of this file. */
 
 import * as Koa from "koa";
@@ -56,13 +56,7 @@ app.use(cors({
     allowHeaders: ['Content-Type', 'Authorization', 'Accept', 'token'],
 }))
 
-import Router = require("koa-router");
-
-let router = new Router();
-
-router.get("/test", (ctx) => {
-    ctx.body = { "msg": "ok nice." }
-})
+import router from "../src";
 
 app.use(router.routes());
 
