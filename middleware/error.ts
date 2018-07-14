@@ -2,7 +2,7 @@
  * @Author: Mr.He 
  * @Date: 2018-06-18 09:44:44 
  * @Last Modified by: Mr.He
- * @Last Modified time: 2018-07-14 21:00:42
+ * @Last Modified time: 2018-07-14 21:49:58
  * @content what is the content of this file. */
 
 
@@ -13,6 +13,10 @@ let errorCode: { [index: string]: any } = {
 
     "106": "code 不正确",
     "107": "code 已过期",
+
+    "110": "email 已注册",
+
+    "404": "资源不存在"
 }
 
 export default errorCode;

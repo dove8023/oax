@@ -2,7 +2,7 @@
  * @Author: Mr.He 
  * @Date: 2018-07-13 23:53:15 
  * @Last Modified by: Mr.He
- * @Last Modified time: 2018-07-14 21:09:55
+ * @Last Modified time: 2018-07-14 21:56:56
  * @content what is the content of this file. */
 
 
@@ -12,63 +12,78 @@ import * as uuid from "uuid";
 import cache from "common/cache";
 const config = require("config/config.json");
 const captcha = require("trek-captcha");
+import Models from "sqlModel";
 
 
 let router = new Router({
     prefix: '/api/v1'
 });
 
-router.get("/users/:id", (ctx) => {
-    ctx.body = { "msg": "get ." }
+router.get("/users/:id", async (ctx) => {
+    let { id } = ctx.params;
+    let result = await Models.users.findById(id);
+    if (!result) {
+        return ctx.error(404)
+    }
+
+    return ctx.success(result);
 });
 
 
-router.get("/users", (ctx) => {
-    ctx.body = { "msg": "find. ok nice." }
+router.get("/users", async (ctx) => {
+    let { page = 0, size = 20 } = ctx.request.query;
+    let result = await Models.users.findAndCountAll({
+        order: [["created_at", "desc"]],
+        offset: page * size,
+        limit: size
+    });
+    ctx.success(result);
 });
 
 
 router.post("/users", async (ctx) => {
-    // bodyParamsCheck(ctx, [
-    //     {
-    //         key: "twtterName",
-    //         msg: "twtterName required"
-    //     }, {
-    //         key: "radditName",
-    //         msg: "radditName required"
-    //     }, {
-    //         key: "facebookName",
-    //         msg: "facebookName required"
-    //     }, {
-    //         key: "firstName",
-    //         msg: "firstName required"
-    //     }, {
-    //         key: "lastName",
-    //         msg: "lastName required"
-    //     }, {
-    //         key: "country",
-    //         msg: "country required"
-    //     }, {
-    //         key: "code",
-    //         msg: "code required"
-    //     }, {
-    //         key: "codeId",
-    //         msg: "codeId required"
-    //     }
-    // ]);
+    bodyParamsCheck(ctx, [
+        {
+            key: "twtterName",
+            msg: "twtterName required"
+        }, {
+            key: "radditName",
+            msg: "radditName required"
+        },
+        {
+            key: "facebookName",
+            msg: "facebookName required"
+        }, {
+            key: "firstName",
+            msg: "firstName required"
+        }, {
+            key: "lastName",
+            msg: "lastName required"
+        }, {
+            key: "country",
+            msg: "country required"
+        }, {
+            key: "code",
+            msg: "code required"
+        }, {
+            key: "codeId",
+            msg: "codeId required"
+        }
+    ]);
 
-    // ctx.validateBody('email')
-    //     .required("email required")
-    //     .isString()
-    //     .trim()
-    //     .isEmail('Invalid email format')
+    ctx.validateBody('email')
+        .required("email required")
+        .isString()
+        .trim()
+        .isEmail('Invalid email format')
 
-    // ctx.validateBody('address')
-    //     .required("address required")
-    //     .isArray()
-    //     .isLength(1, 5)
+    ctx.validateBody('address')
+        .required("address required")
+        .isArray()
+        .isLength(1, 5)
 
 
+    /* ============= 图片验证码 ============ */
     let { code, codeId } = ctx.request.body;
     let codeData = await cache.read(codeId);
     if (!codeData) {
@@ -80,11 +95,20 @@ router.post("/users", async (ctx) => {
         return ctx.error(106)
     }
 
-    /* 图片验证码通过 */
+    /* ============= email check ============ */
+    let emailUser = await Models.users.findOne({
+        where: { email: ctx.vals.email }
+    });
+    if (emailUser) {
+        return ctx.error(110);
+    }
 
+    let result = await Models.users.create({
+        id: uuid.v1(),
+        ...ctx.vals
+    });
 
-
-    ctx.body = { codeData }
+    ctx.success(result)
 });
 
 /* 获取 图片验证码 id */

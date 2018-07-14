@@ -2,7 +2,7 @@
  * @Author: Mr.He 
  * @Date: 2018-03-22 16:20:52 
  * @Last Modified by: Mr.He
- * @Last Modified time: 2018-07-14 17:32:41
+ * @Last Modified time: 2018-07-14 21:54:54
  * @content what is the content of this file. */
 
 import * as Koa from "koa";
@@ -11,7 +11,6 @@ import * as moment from "moment";
 import { response } from "middleware";
 import * as cors from "koa2-cors";
 const bouncer = require("koa-bouncer");
-import cookie from "koa-cookie";
 let app = new Koa();
 
 app.use(async (ctx: Koa.Context, next: Function) => {
@@ -47,7 +46,6 @@ app.use(async (ctx: Koa.Context, next: Function) => {
     console.log(`${moment().format()} ${ctx.method} ${ctx.url} ${ctx.status}--- ${ms}ms`);
 });
 
-// app.use(cookie());
 
 app.use(bouncer.middleware());
 

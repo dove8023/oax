@@ -2,7 +2,7 @@
  * @Author: Mr.He 
  * @Date: 2018-03-21 16:46:54 
  * @Last Modified by: Mr.He
- * @Last Modified time: 2018-07-14 09:03:34
+ * @Last Modified time: 2018-07-14 21:37:49
  * @content what is the content of this file. */
 
 import path = require("path");
@@ -33,5 +33,6 @@ export function bodyParamsCheck(ctx, params: { key: string, msg: string }[]) {
             .required(item.msg)
             .isString()
             .trim()
+            .check(ctx.vals[item.key])
     }
 }

@@ -2,7 +2,7 @@
  * @Author: Mr.He 
  * @Date: 2018-03-28 10:31:11 
  * @Last Modified by: Mr.He
- * @Last Modified time: 2018-07-13 23:50:27
+ * @Last Modified time: 2018-07-14 21:14:12
  * @content what is the content of this file. */
 
 
@@ -64,4 +64,4 @@ let options = {
     timestamps: true,
     tableName: 'users'
 }
-export default DB.define('Users', columns, options);
+export default DB.define('users', columns, options);
