@@ -2,7 +2,7 @@
  * @Author: Mr.He 
  * @Date: 2018-03-05 22:01:41 
  * @Last Modified by: Mr.He
- * @Last Modified time: 2018-03-06 10:14:37
+ * @Last Modified time: 2018-07-14 22:23:05
  * @content what is the content of this file. */
 
 import { createClient, RedisClient } from "redis";
@@ -60,6 +60,10 @@ export class Cache {
                 });
             }
         })
+    }
+
+    async del(id: string): Promise<any> {
+        return await this._client.del(id);
     }
 }
 

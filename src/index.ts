@@ -2,7 +2,7 @@
  * @Author: Mr.He 
  * @Date: 2018-07-13 23:53:15 
  * @Last Modified by: Mr.He
- * @Last Modified time: 2018-07-14 21:56:56
+ * @Last Modified time: 2018-07-14 22:25:06
  * @content what is the content of this file. */
 
 
@@ -91,10 +91,11 @@ router.post("/users", async (ctx) => {
     }
 
     if (codeData.code != code) {
-        // delete the codeData ??
+        await cache.del(codeId);
         return ctx.error(106)
     }
 
+    await cache.del(codeId);
     /* ============= email check ============ */
     let emailUser = await Models.users.findOne({
         where: { email: ctx.vals.email }
