@@ -32,17 +32,6 @@
 }
 ```
 
-**错误**
-
-```js
-  {
-    code: 404001,
-    message: 'trade不存在'
-  }
-
-
-```
-
 
 ### 获取 验证码图片
 `GET /api/v1/captchaimg/:id`
