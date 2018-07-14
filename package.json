@@ -18,6 +18,7 @@
     "jshint": "^2.9.5",
     "koa": "^2.5.0",
     "koa-body": "^2.5.0",
+    "koa-bouncer": "^6.0.4",
     "koa-router": "^7.4.0",
     "koa-static": "^4.0.2",
     "koa2-cors": "^2.0.5",

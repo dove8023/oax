@@ -2,7 +2,7 @@
  * @Author: Mr.He 
  * @Date: 2018-03-21 16:46:54 
  * @Last Modified by: Mr.He
- * @Last Modified time: 2018-06-02 19:04:52
+ * @Last Modified time: 2018-07-14 09:03:34
  * @content what is the content of this file. */
 
 import path = require("path");
@@ -24,5 +24,14 @@ export function loadTest(dir: string, callback?: Function): void {
                 callback(g);
             }
         }
+    }
+}
+
+export function bodyParamsCheck(ctx, params: { key: string, msg: string }[]) {
+    for (let item of params) {
+        ctx.validateBody(item.key)
+            .required(item.msg)
+            .isString()
+            .trim()
     }
 }
