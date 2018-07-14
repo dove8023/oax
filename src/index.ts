@@ -2,12 +2,15 @@
  * @Author: Mr.He 
  * @Date: 2018-07-13 23:53:15 
  * @Last Modified by: Mr.He
- * @Last Modified time: 2018-07-14 17:45:48
+ * @Last Modified time: 2018-07-14 21:09:55
  * @content what is the content of this file. */
 
 
 import Router = require("koa-router");
-import { bodyParamsCheck } from "../common/utils";
+import { bodyParamsCheck } from "common/utils";
+import * as uuid from "uuid";
+import cache from "common/cache";
+const config = require("config/config.json");
 const captcha = require("trek-captcha");
 
 
@@ -20,12 +23,12 @@ router.get("/users/:id", (ctx) => {
 });
 
 
-// router.get("/users", (ctx) => {
-//     ctx.body = { "msg": "find. ok nice." }
-// });
-
-
 router.get("/users", (ctx) => {
+    ctx.body = { "msg": "find. ok nice." }
+});
+
+
+router.post("/users", async (ctx) => {
     // bodyParamsCheck(ctx, [
     //     {
     //         key: "twtterName",
@@ -45,6 +48,12 @@ router.get("/users", (ctx) => {
     //     }, {
     //         key: "country",
     //         msg: "country required"
+    //     }, {
+    //         key: "code",
+    //         msg: "code required"
+    //     }, {
+    //         key: "codeId",
+    //         msg: "codeId required"
     //     }
     // ]);
 
@@ -60,28 +69,49 @@ router.get("/users", (ctx) => {
     //     .isLength(1, 5)
 
 
+    let { code, codeId } = ctx.request.body;
+    let codeData = await cache.read(codeId);
+    if (!codeData) {
+        return ctx.error(101);
+    }
 
-    ctx.body = { "msg": "ctx.vals.twtterName " }
+    if (codeData.code != code) {
+        // delete the codeData ??
+        return ctx.error(106)
+    }
+
+    /* 图片验证码通过 */
+
+
+
+    ctx.body = { codeData }
 });
 
-/* 验证码图片 */
-router.get("/validateimg", async (ctx) => {
+/* 获取 图片验证码 id */
+router.get("/captchaid", async (ctx) => {
+    let id = uuid.v1();
+    await cache.write(id, { code: "", count: 0 }, config.CaptchaTime);
+    ctx.success({
+        codeId: id
+    });
+});
+
+
+/* 获取 图片验证码 */
+router.get("/captchaimg/:id", async (ctx) => {
+    let { id } = ctx.params;
+    let code = await cache.read(id);
+    if (!code) {
+        return ctx.error(101);
+    }
+    if (code.count != 0) {
+        return ctx.error(102)
+    }
+
     ctx.type = "image/gif";
     let { token, buffer } = await captcha();
-    // console.log(ctx.cookie)
-    ctx.cookies.set(
-        'codeId',
-        token,
-        {
-            // domain: "/",  // 写cookie所在的域名
-            // path: "/api",       // 写cookie所在的路径
-            maxAge: 1000 * 30, // cookie有效时长 ms
-            // expires: new Date('2018-07-15'),  // cookie失效时间
-            httpOnly: false,  // 是否只用于http请求中获取
-            overwrite: false  // 是否允许重写
-        }
-    )
+    await cache.write(id, { code: token, count: 1 }, config.CaptchaTime);
     ctx.body = buffer;
-})
+});
 
 export default router;

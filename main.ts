@@ -2,7 +2,7 @@
  * @Author: Mr.He 
  * @Date: 2018-03-02 11:19:32 
  * @Last Modified by: Mr.He
- * @Last Modified time: 2018-07-14 11:29:08
+ * @Last Modified time: 2018-07-14 20:31:36
  * @content what is the content of this file. */
 
 require('app-module-path').addPath(__dirname);
@@ -19,12 +19,12 @@ process.on('uncaughtException', function (err) {
 });
 
 /* init DB, import table models. */
-// init(config.mysql.url, config.mysql.debug);
-// import "sqlModel/index";
-// DB.sync({ force: false });
+init(config.mysql.url, config.mysql.debug);
+import "sqlModel/index";
+DB.sync({ force: false });
 
 /* inject redis server. */
-// cache.init(config.redis.url);
+cache.init(config.redis.url);
 
 import app from "./http";
 const http = require("http");
