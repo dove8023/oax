@@ -2,7 +2,7 @@
  * @Author: Mr.He 
  * @Date: 2018-07-14 22:46:40 
  * @Last Modified by: Mr.He
- * @Last Modified time: 2018-07-15 00:14:11
+ * @Last Modified time: 2018-07-15 23:08:59
  * @content what is the content of this file. */
 
 import fs = require("fs");
@@ -83,7 +83,8 @@ describe('#post user', function () {
         delete theData.twtterName;
         let result = await bootup.post("/api/v1/users")
             .send(theData)
-            .expect(HTTP_ERR);
+            .expect(HTTP_OK);
+        assert.notEqual(result.body.code, 0);
     });
 
     it("the params address check", async () => {
@@ -91,12 +92,15 @@ describe('#post user', function () {
         theData.address = [];
         let result = await bootup.post("/api/v1/users")
             .send(theData)
-            .expect(HTTP_ERR);
+            .expect(HTTP_OK);
+        assert.notEqual(result.body.code, 0);
 
         theData.address = ["1", "2", "3", "4", "5", "6"];
         let result2 = await bootup.post("/api/v1/users")
             .send(theData)
-            .expect(HTTP_ERR);
+            .expect(HTTP_OK);
+        assert.notEqual(result.body.code, 0);
+
     });
 
     it("the user create success", async () => {
