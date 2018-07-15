@@ -37,7 +37,8 @@
     "ts-node": "^5.0.1",
     "tslib": "^1.9.0",
     "typescript": "^2.7.2",
-    "uuid": "^3.2.1"
+    "uuid": "^3.2.1",
+    "validator": "^10.4.0"
   },
   "devDependencies": {
     "@types/koa": "^2.0.44",
@@ -50,6 +51,7 @@
     "@types/redis": "^2.8.6",
     "@types/sequelize": "^4.27.8",
     "@types/uuid": "^3.4.3",
+    "@types/validator": "^9.4.1",
     "mocha": "^5.2.0",
     "superkoa": "^1.0.3"
   }

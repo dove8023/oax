@@ -2,7 +2,7 @@
  * @Author: Mr.He 
  * @Date: 2018-03-21 16:46:54 
  * @Last Modified by: Mr.He
- * @Last Modified time: 2018-07-14 21:37:49
+ * @Last Modified time: 2018-07-15 23:00:03
  * @content what is the content of this file. */
 
 import path = require("path");
@@ -28,11 +28,15 @@ export function loadTest(dir: string, callback?: Function): void {
 }
 
 export function bodyParamsCheck(ctx, params: { key: string, msg: string }[]) {
+    let result = {};
     for (let item of params) {
-        ctx.validateBody(item.key)
-            .required(item.msg)
-            .isString()
-            .trim()
-            .check(ctx.vals[item.key])
+        let val = ctx.request.body[item.key];
+        if (!val || typeof val != "string") {
+            ctx.error(500, item.msg)
+            return false;
+        }
+        result[item.key] = val;
     }
+
+    return result;
 }

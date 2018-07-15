@@ -2,7 +2,7 @@
  * @Author: Mr.He 
  * @Date: 2018-07-13 23:53:15 
  * @Last Modified by: Mr.He
- * @Last Modified time: 2018-07-14 22:25:06
+ * @Last Modified time: 2018-07-15 23:05:10
  * @content what is the content of this file. */
 
 
@@ -13,7 +13,7 @@ import cache from "common/cache";
 const config = require("config/config.json");
 const captcha = require("trek-captcha");
 import Models from "sqlModel";
-
+import * as v from "validator";
 
 let router = new Router({
     prefix: '/api/v1'
@@ -42,7 +42,7 @@ router.get("/users", async (ctx) => {
 
 
 router.post("/users", async (ctx) => {
-    bodyParamsCheck(ctx, [
+    let paramsCheck: { [index: string]: string } = bodyParamsCheck(ctx, [
         {
             key: "twtterName",
             msg: "twtterName required"
@@ -68,20 +68,25 @@ router.post("/users", async (ctx) => {
         }, {
             key: "codeId",
             msg: "codeId required"
+        }, {
+            key: "email",
+            msg: "email required"
         }
     ]);
+    if (!paramsCheck) {
+        return;
+    }
 
-    ctx.validateBody('email')
-        .required("email required")
-        .isString()
-        .trim()
-        .isEmail('Invalid email format')
+    // is email
+    if (!v.isEmail(paramsCheck.email)) {
+        return ctx.error(500, "email 格式不对");
+    }
 
-    ctx.validateBody('address')
-        .required("address required")
-        .isArray()
-        .isLength(1, 5)
-
+    // address check
+    let { address } = ctx.request.body;
+    if (!address || !Array.isArray(address) || address.length < 1 || address.length > 5) {
+        return ctx.error(500, "address 不符合要求");
+    }
 
     /* ============= 图片验证码 ============ */
     let { code, codeId } = ctx.request.body;
@@ -106,7 +111,8 @@ router.post("/users", async (ctx) => {
 
     let result = await Models.users.create({
         id: uuid.v1(),
-        ...ctx.vals
+        ...paramsCheck,
+        address
     });
 
     ctx.success(result)
