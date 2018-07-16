@@ -1,0 +1,58 @@
+{
+  "name": "save-eth-address",
+  "version": "1.0.0",
+  "description": "### eth address backend",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "npx mocha",
+    "start": "node server.js",
+    "build": "npx tsc"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/assert": "0.0.31",
+    "app-module-path": "^2.2.0",
+    "continuation-local-storage": "^3.2.1",
+    "jshint": "^2.9.5",
+    "koa": "^2.5.0",
+    "koa-body": "^2.5.0",
+    "koa-bouncer": "^6.0.4",
+    "koa-cookie": "^1.0.0",
+    "koa-router": "^7.4.0",
+    "koa-static": "^4.0.2",
+    "koa2-cors": "^2.0.5",
+    "lodash": "^4.17.5",
+    "md5": "^2.2.1",
+    "moment": "^2.20.1",
+    "mysql2": "^1.5.3",
+    "redis": "^2.8.0",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2",
+    "sequelize": "^4.35.1",
+    "trek-captcha": "^0.4.0",
+    "ts-node": "^5.0.1",
+    "tslib": "^1.9.0",
+    "typescript": "^2.7.2",
+    "uuid": "^3.2.1",
+    "validator": "^10.4.0"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.0.44",
+    "@types/koa-router": "^7.0.27",
+    "@types/koa-static": "^4.0.0",
+    "@types/koa2-cors": "^2.0.1",
+    "@types/md5": "^2.1.32",
+    "@types/mocha": "^5.2.4",
+    "@types/node": "^9.4.6",
+    "@types/redis": "^2.8.6",
+    "@types/sequelize": "^4.27.8",
+    "@types/uuid": "^3.4.3",
+    "@types/validator": "^9.4.1",
+    "mocha": "^5.2.0",
+    "superkoa": "^1.0.3"
+  }
+}
