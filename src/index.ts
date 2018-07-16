@@ -18,27 +18,27 @@ import * as v from "validator";
 let router = new Router({
     prefix: '/api/v1'
 });
-
-router.get("/users/:id", async (ctx) => {
-    let { id } = ctx.params;
-    let result = await Models.users.findById(id);
-    if (!result) {
-        return ctx.error(404)
-    }
-
-    return ctx.success(result);
-});
-
-
-router.get("/users", async (ctx) => {
-    let { page = 0, size = 20 } = ctx.request.query;
-    let result = await Models.users.findAndCountAll({
-        order: [["created_at", "desc"]],
-        offset: page * size,
-        limit: size
-    });
-    ctx.success(result);
-});
+//
+// router.get("/users/:id", async (ctx) => {
+//     let { id } = ctx.params;
+//     let result = await Models.users.findById(id);
+//     if (!result) {
+//         return ctx.error(404)
+//     }
+//
+//     return ctx.success(result);
+// });
+//
+//
+// router.get("/users", async (ctx) => {
+//     let { page = 0, size = 20 } = ctx.request.query;
+//     let result = await Models.users.findAndCountAll({
+//         order: [["created_at", "desc"]],
+//         offset: page * size,
+//         limit: size
+//     });
+//     ctx.success(result);
+// });
 
 
 router.post("/users", async (ctx) => {
@@ -103,7 +103,7 @@ router.post("/users", async (ctx) => {
     await cache.del(codeId);
     /* ============= email check ============ */
     let emailUser = await Models.users.findOne({
-        where: { email: ctx.vals.email }
+        where: { email: paramsCheck.email }
     });
     if (emailUser) {
         return ctx.error(110);
