@@ -32,8 +32,8 @@ const http = require("http");
 let PORT = config.port;
 let server = http.createServer(app.callback());
 server.on('listening', function () {
-    if (!/^\d+$/.test(PORT)) {
-        fs.chmodSync(PORT, '777')
+    if (!/^\d+$/.test(`${PORT}`)) {
+        fs.chmodSync(`${PORT}`, '777')
     }
 });
 
