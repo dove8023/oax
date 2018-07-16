@@ -7,7 +7,7 @@
 
 require('app-module-path').addPath(__dirname);
 import fs = require("fs");
-let config = require("config/config.json");
+import {config}from "config/config";
 import { init, DB } from "common/db";
 import cache from "common/cache";
 

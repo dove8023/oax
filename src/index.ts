@@ -10,7 +10,7 @@ import Router = require("koa-router");
 import { bodyParamsCheck } from "common/utils";
 import * as uuid from "uuid";
 import cache from "common/cache";
-const config = require("config/config.json");
+import {config}from "config/config";
 const captcha = require("trek-captcha");
 import Models from "sqlModel";
 import * as v from "validator";

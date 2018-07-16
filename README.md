@@ -2,7 +2,7 @@
 
 ## how to build
 ```js
-    /* config config/config.json */
+    config.ts
     npm install
     npm run build
 ```

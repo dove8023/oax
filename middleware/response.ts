@@ -8,7 +8,7 @@
 
 import { Context } from 'koa';
 import errorCode from "./error";
-let config = require("config/config.json");
+import {config}from "config/config";
 
 export async function response(ctx: Context, next: Function) {
     ctx.success = function (data: any) {
