@@ -21,7 +21,7 @@ process.on('uncaughtException', function (err) {
 /* init DB, import table models. */
 init(config.mysql.url, config.mysql.debug);
 import "sqlModel/index";
-DB.sync({ force: false });
+// DB.sync({ force: false });
 
 /* inject redis server. */
 cache.init(config.redis.url);
