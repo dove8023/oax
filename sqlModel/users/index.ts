@@ -50,7 +50,11 @@ let columns = {
     deleted_at: {
         type: sequelize.DATE,
         allowNull: true,
-    }
+    },
+    checkMarketing: {
+        type: sequelize.BOOLEAN,
+        allowNull: true,
+    },
 }
 
 let options = {

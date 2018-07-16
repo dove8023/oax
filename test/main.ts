@@ -72,7 +72,8 @@ describe('#post user', function () {
             "lastName": "last",
             "country": "country12",
             "code": code,
-            "codeId": codeId
+            "codeId": codeId,
+            "checkMarketing":1
         }
     }));
 

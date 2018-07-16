@@ -109,11 +109,26 @@ router.post("/users", async (ctx) => {
         return ctx.error(110);
     }
 
-    let result = await Models.users.create({
+
+
+    let parameter = {
         id: uuid.v1(),
         ...paramsCheck,
         address
-    });
+    }
+
+    /**
+     * Check for marketing
+     */
+    let { checkMarketing } = ctx.request.body;
+
+    if(checkMarketing){
+        parameter['checkMarketing']=checkMarketing
+    }
+
+
+
+    let result = await Models.users.create(parameter);
 
     ctx.success(result)
 });
