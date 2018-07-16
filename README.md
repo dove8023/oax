@@ -7,6 +7,10 @@
     npm run build
 ```
 
+## how to test
+```js
+    npx mocha test --exit
+```
 # API 
 ### Retrieve Captcha ID codeID
 `GET /api/v1/captchaid`
