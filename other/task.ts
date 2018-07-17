@@ -1,8 +1,8 @@
 /*
  * @Author: Mr.He 
  * @Date: 2018-07-17 20:42:10 
- * @Last Modified by: Mr.He
- * @Last Modified time: 2018-07-17 21:32:33
+ * @Last Modified by: he@whaleblue.design
+ * @Last Modified time: 2018-07-17 23:43:09
  * @content what is the content of this file. */
 
 
@@ -10,12 +10,9 @@ import Models from "../sqlModel";
 import * as moment from "moment";
 import { Parser } from "json2csv";
 import * as fs from "fs";
+import mail from "./mail";
 
-let startTime = moment().add(-1, 'day').startOf("day");
-console.log(startTime.format())
-
-
-async function getRegisterUser() {
+export async function getRegisterUser() {
     let startTime = moment().add(-1, 'day').startOf("day").format();
     let endTime = moment().startOf("day").format();
     let users = await Models.users.findAll({
@@ -26,10 +23,6 @@ async function getRegisterUser() {
             }
         }
     });
-    // for (let item of users) {
-    //     console.log(item.toJSON());
-
-    // }
 
     transToCsv(users)
 }
@@ -41,12 +34,9 @@ function transToCsv(data) {
     const csv = json2csvParser.parse(data);
 
 
-    console.log(csv);
-    let writeStream = fs.createWriteStream(__dirname + "/text.csv");
-    writeStream.write(csv);
-    console.log(writeStream.path)
-    // writeStream.
+    /*  let writeStream = fs.createWriteStream(__dirname + "/text.csv");
+     writeStream.write(csv); */
+
+    // send email
+    mail(csv);
 }
-
-
-getRegisterUser()

@@ -6,8 +6,10 @@
  * @content what is the content of this file. */
 
 import * as schedule from "node-schedule";
-import "./task"
+import { getRegisterUser } from "./task"
 
 schedule.scheduleJob({ /* hour: 7, minute: 30*/ second: 1 }, (fireDate) => {
+
+    getRegisterUser();
     console.log('This job was supposed to run at ' + fireDate + ', but actually ran at ' + new Date());
 });

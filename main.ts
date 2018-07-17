@@ -1,8 +1,8 @@
 /*
  * @Author: he@whaleblue.design
  * @Date: 2018-03-02 11:19:32
- * @Last Modified by: Mr.He
- * @Last Modified time: 2018-07-17 22:20:46
+ * @Last Modified by: he@whaleblue.design
+ * @Last Modified time: 2018-07-17 23:02:58
  * @content what is the content of this file. */
 
 require('app-module-path').addPath(__dirname);
@@ -25,6 +25,9 @@ import "sqlModel/index";
 
 /* inject redis server. */
 cache.init(config.redis.url);
+
+/* other job */
+import "./other";
 
 import app from "./http";
 const http = require("http");
