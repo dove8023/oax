@@ -1,9 +1,9 @@
 /*
- * @Author: Mr.He 
- * @Date: 2018-06-02 18:03:36 
+ * @Author: he@whaleblue.design
+ * @Date: 2018-06-02 18:03:36
  * @Last Modified by: Mr.He
- * @Last Modified time: 2018-06-18 10:04:40
- * @content: 
+ * @Last Modified time: 2018-07-17 22:23:28
+ * @content:
  */
 
 import * as Koa from "koa";
@@ -40,7 +40,7 @@ export async function LoginCheck(ctx: Koa.Context, next: Function): Promise<any>
     })
 }
 
-/* 
+/*
 await Auth.loginCheck(ctx);
     return new Promise((resolve, reject) => {
         session.run(async () => {

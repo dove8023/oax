@@ -1,13 +1,13 @@
 /*
- * @Author: Mr.He 
- * @Date: 2018-03-02 11:19:32 
+ * @Author: he@whaleblue.design
+ * @Date: 2018-03-02 11:19:32
  * @Last Modified by: Mr.He
- * @Last Modified time: 2018-07-14 20:31:36
+ * @Last Modified time: 2018-07-17 22:20:46
  * @content what is the content of this file. */
 
 require('app-module-path').addPath(__dirname);
 import fs = require("fs");
-let config = require("config/config.json");
+import { config } from "config/config";
 import { init, DB } from "common/db";
 import cache from "common/cache";
 
@@ -21,7 +21,7 @@ process.on('uncaughtException', function (err) {
 /* init DB, import table models. */
 init(config.mysql.url, config.mysql.debug);
 import "sqlModel/index";
-DB.sync({ force: false });
+// DB.sync({ force: false });
 
 /* inject redis server. */
 cache.init(config.redis.url);
@@ -32,8 +32,8 @@ const http = require("http");
 let PORT = config.port;
 let server = http.createServer(app.callback());
 server.on('listening', function () {
-    if (!/^\d+$/.test(PORT)) {
-        fs.chmodSync(PORT, '777')
+    if (!/^\d+$/.test(`${PORT}`)) {
+        fs.chmodSync(`${PORT}`, '777')
     }
 });
 

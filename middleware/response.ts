@@ -1,14 +1,14 @@
 /*
- * @Author: Mr.He 
- * @Date: 2018-06-18 09:40:43 
+ * @Author: he@whaleblue.design
+ * @Date: 2018-06-18 09:40:43
  * @Last Modified by: Mr.He
- * @Last Modified time: 2018-07-13 23:19:53
+ * @Last Modified time: 2018-07-17 22:23:44
  * @content what is the content of this file. */
 
 
 import { Context } from 'koa';
 import errorCode from "./error";
-let config = require("config/config.json");
+import { config } from "config/config";
 
 export async function response(ctx: Context, next: Function) {
     ctx.success = function (data: any) {

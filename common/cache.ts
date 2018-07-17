@@ -1,8 +1,8 @@
 /*
- * @Author: Mr.He 
- * @Date: 2018-03-05 22:01:41 
+ * @Author: he@whaleblue.design
+ * @Date: 2018-03-05 22:01:41
  * @Last Modified by: Mr.He
- * @Last Modified time: 2018-07-14 22:23:05
+ * @Last Modified time: 2018-07-17 22:21:47
  * @content what is the content of this file. */
 
 import { createClient, RedisClient } from "redis";

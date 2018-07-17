@@ -1,7 +1,7 @@
 {
   "name": "save-eth-address",
   "version": "1.0.0",
-  "description": "### 货物系统",
+  "description": "### eth address backend",
   "main": "server.js",
   "directories": {
     "test": "test"

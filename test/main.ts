@@ -1,12 +1,12 @@
 /*
- * @Author: Mr.He 
- * @Date: 2018-07-14 22:46:40 
+ * @Author: he@whaleblue.design
+ * @Date: 2018-07-14 22:46:40
  * @Last Modified by: Mr.He
- * @Last Modified time: 2018-07-15 23:08:59
+ * @Last Modified time: 2018-07-17 22:27:33
  * @content what is the content of this file. */
 
 import fs = require("fs");
-let config = require("config/config.json");
+import { config } from "config/config";
 import { init, DB } from "common/db";
 import cache from "common/cache";
 import * as _ from "lodash";
@@ -72,7 +72,8 @@ describe('#post user', function () {
             "lastName": "last",
             "country": "country12",
             "code": code,
-            "codeId": codeId
+            "codeId": codeId,
+            "checkMarketing": 1
         }
     }));
 

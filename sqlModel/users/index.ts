@@ -1,8 +1,8 @@
 /*
- * @Author: Mr.He 
- * @Date: 2018-03-28 10:31:11 
+ * @Author: he@whaleblue.design
+ * @Date: 2018-03-28 10:31:11
  * @Last Modified by: Mr.He
- * @Last Modified time: 2018-07-14 21:14:12
+ * @Last Modified time: 2018-07-17 22:24:04
  * @content what is the content of this file. */
 
 
@@ -50,7 +50,11 @@ let columns = {
     deleted_at: {
         type: sequelize.DATE,
         allowNull: true,
-    }
+    },
+    checkMarketing: {
+        type: sequelize.BOOLEAN,
+        allowNull: true,
+    },
 }
 
 let options = {

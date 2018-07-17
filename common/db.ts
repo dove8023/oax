@@ -1,10 +1,10 @@
 import sequelize, { Sequelize } from 'sequelize';
 
 /*
- * @Author: Mr.He 
- * @Date: 2018-03-02 11:55:52 
+ * @Author: he@whaleblue.design
+ * @Date: 2018-03-02 11:55:52
  * @Last Modified by: Mr.He
- * @Last Modified time: 2018-03-21 18:29:53
+ * @Last Modified time: 2018-07-17 22:22:15
  * @content what is the content of this file. */
 
 export let DB: Sequelize;
