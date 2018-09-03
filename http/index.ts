@@ -59,6 +59,11 @@ app.use(cors({
     allowMethods: ['GET', 'POST', 'DELETE', 'PUT', 'OPTIONS'],
     allowHeaders: ['Content-Type', 'Authorization', 'Accept', 'token'],
 }))
+app.use((ctx) => {
+    if (ctx.method == "OPTIONS") {
+        return ctx.success("ok")
+    }
+})
 
 import router from "../src";
 
