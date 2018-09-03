@@ -59,9 +59,12 @@ app.use(cors({
     allowMethods: ['GET', 'POST', 'DELETE', 'PUT', 'OPTIONS'],
     allowHeaders: ['Content-Type', 'Authorization', 'Accept', 'token'],
 }))
-app.use((ctx) => {
+app.use(async (ctx, next) => {
     if (ctx.method == "OPTIONS") {
+        console.log("options")
         return ctx.success("ok")
+    } else {
+        return await next();
     }
 })
 

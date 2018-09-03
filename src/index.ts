@@ -2,7 +2,7 @@
  * @Author: he@whaleblue.design
  * @Date: 2018-07-13 23:53:15
  * @Last Modified by: Mr.He
- * @Last Modified time: 2018-07-17 22:26:24
+ * @Last Modified time: 2018-09-03 22:32:01
  * @content what is the content of this file. */
 
 
@@ -22,7 +22,8 @@ router.post("/hy", async (ctx) => {
     console.log(ctx.request.body)
     ctx.success({
         code: 0,
-        msg: "hello"
+        msg: "hello",
+        data: "good man"
     })
 })
 
