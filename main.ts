@@ -19,15 +19,15 @@ process.on('uncaughtException', function (err) {
 });
 
 /* init DB, import table models. */
-init(config.mysql.url, config.mysql.debug);
-import "sqlModel/index";
+// init(config.mysql.url, config.mysql.debug);
+// import "sqlModel/index";
 // DB.sync({ force: false });
 
 /* inject redis server. */
-cache.init(config.redis.url);
+// cache.init(config.redis.url);
 
 /* other job */
-import "./other";
+// import "./other";
 
 import app from "./http";
 const http = require("http");
