@@ -1,15 +1,15 @@
 /*
  * @Author: he@whaleblue.design
  * @Date: 2018-03-02 11:19:32
- * @Last Modified by: he@whaleblue.design
- * @Last Modified time: 2018-07-17 23:02:58
+ * @Last Modified by: Mr.He
+ * @Last Modified time: 2019-02-28 22:31:05
  * @content what is the content of this file. */
 
 require('app-module-path').addPath(__dirname);
 import fs = require("fs");
 import { config } from "config/config";
-import { init, DB } from "common/db";
-import cache from "common/cache";
+// import { init, DB } from "common/db";
+// import cache from "common/cache";
 
 process.on('unhandledRejection', (reason: any, p: PromiseLike<any>) => {
     console.error("unhandledRejection", reason);
